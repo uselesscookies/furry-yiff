@@ -65,6 +65,11 @@ public class StackArray<E> {
 		intStack.push(10);
 		intStack.push(30);
 		intStack.push(-40);
+		
+		/*This function counts and displays the number of positive integers
+		 * and number of negative integers in IntStack. IntStack must be returned
+		 * to its original state after counting.
+		 */
 		public void countPosNeg() { //gives errors. why?
 			int countPos = 0;
 			int countNeg = 0;
