@@ -57,6 +57,43 @@ public class StackArray<E> {
 		return "";
 	}
 
+	/*
+	 * This function counts and displays the number of positive integers and number
+	 * of negative integers in IntStack. IntStack must be returned to its original
+	 * state after counting.
+	 */
+	public void countPosNeg() {
+		int countPos = 0;
+		int countNeg = 0;
+		while (!intStack.isEmpty()) {
+			if (intStack.top > 0) { // read positive numbers
+				countPos++;
+			} else if (intStack.top < 0) { // read negative numbers
+				countNeg++;
+			}
+			intStack.pop();
+		}
+		System.out.println("The number of positive integers is " + countPos + " and the number of negative integers is "
+				+ countNeg);
+
+	}
+
+	/*
+	 * Recursive method to test whether two stacks contain the same elements. The
+	 * elements stored in the stack are integers. Method called at the very end of
+	 * the program.
+	 */
+	public Boolean sameStack(StackArray<E> s2) {
+		while (!s2.isEmpty()) {
+			if (s2.top == stack.top) {
+				s2.pop();
+			} else {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public static void main(String[] args) {
 
 		// Code reference for countPosNeg method
@@ -65,45 +102,13 @@ public class StackArray<E> {
 		intStack.push(10);
 		intStack.push(30);
 		intStack.push(-40);
-		
-		/*This function counts and displays the number of positive integers
-		 * and number of negative integers in IntStack. IntStack must be returned
-		 * to its original state after counting.
-		 */
-		public void countPosNeg() { //gives errors. why?
-			int countPos = 0;
-			int countNeg = 0;
-			while(!intStack.isEmpty()) {
-				if(intStack.top > 0) { //read positive numbers
-					countPos++;
-				}
-				else if(intStack.top < 0) { //read negative numbers
-					countNeg++;
-				}
-				intStack.pop();
-			}				
-			System.out.println("The number of positive integers is " + countPos + " and the number of negative integers is " + countNeg);
-			
-		}
+
 		System.out.println("intStack before counting");
 		System.out.println(intStack);
 
 		System.out.println("intStack after counting");
 		System.out.println(intStack);
-		
-		/*Recursive method to test whether two stacks contain the same elements. 
-		*The elements stored in the stack are integers. 
-		Method called at the very end of the program.*/
-		public Boolean sameStack(StackArray<E> s2) { //the method header should be correct according to my homework instructions. what could be wrong?
-			while(!s2.isEmpty()) {
-				if(s2.top == stack.top) {
-					s2.pop();
-				}else {
-					return false;
-				}
-			}
-			return true;
-		}
+
 		StackArray<Integer> stack = new StackArray<Integer>();
 		StackArray<Integer> stack2 = new StackArray<Integer>();
 
@@ -120,7 +125,7 @@ public class StackArray<E> {
 		System.out.println(stack2);
 
 		// Calling comparison method
-		//stack.sameStack(stack2);
+		// stack.sameStack(stack2);
 	}
 
 }
