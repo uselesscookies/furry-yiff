@@ -65,17 +65,21 @@ public class StackArray<E> {
 	public void countPosNeg() {
 		int countPos = 0;
 		int countNeg = 0;
-		while (!intStack.isEmpty()) {
-			if (intStack.top > 0) { // read positive numbers
+		Integer temp[] = new Integer[MAX_ITEMS];
+		while (!this.isEmpty()) {
+			if ((Integer) this.items[top] > 0) { // read positive numbers
+				temp[this.top] = (Integer) this.pop();
 				countPos++;
-			} else if (intStack.top < 0) { // read negative numbers
+			} else if ((Integer) this.items[top] < 0) { // read negative numbers
+				temp[this.top] = (Integer) this.pop();
 				countNeg++;
 			}
-			intStack.pop();
+		}
+		for (int i = 0; i <= temp.length - 1; i++) { // push elements back into stack using temporary array
+			this.push((E) temp[this.top + 1]);
 		}
 		System.out.println("The number of positive integers is " + countPos + " and the number of negative integers is "
 				+ countNeg);
-
 	}
 
 	/*
@@ -84,14 +88,18 @@ public class StackArray<E> {
 	 * the program.
 	 */
 	public Boolean sameStack(StackArray<E> s2) {
-		while (!s2.isEmpty()) {
-			if (s2.top == stack.top) {
-				s2.pop();
-			} else {
-				return false;
+		if (s2.items[top] == this.items[top]) {
+			if (this.top == 0 || s2.top == 0) {
+				System.out.println("The stacks are the same!");
+				return true;
 			}
+			this.pop();
+			s2.pop();
+			return sameStack(s2);
+		} else {
+			System.out.println("The stacks are different!");
+			return false;
 		}
-		return true;
 	}
 
 	public static void main(String[] args) {
@@ -105,6 +113,8 @@ public class StackArray<E> {
 
 		System.out.println("intStack before counting");
 		System.out.println(intStack);
+
+		intStack.countPosNeg(); // counts pos and neg values
 
 		System.out.println("intStack after counting");
 		System.out.println(intStack);
@@ -125,7 +135,7 @@ public class StackArray<E> {
 		System.out.println(stack2);
 
 		// Calling comparison method
-		// stack.sameStack(stack2);
+		stack.sameStack(stack2);
 	}
 
 }
